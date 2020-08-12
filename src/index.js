@@ -1,7 +1,23 @@
 'use strict';
 
-import './js/initialHomePage';
-import './js/searchAndPlaginationHomePage';
-import './js/navigation';
-import './js/filmDetailsPage';
-import './js/libraryPage';
+import { Router } from './js/router/router';
+
+import initialHomePage from './js/pages/initialHomePage';
+import libraryPage from './js/pages/libraryPage';
+import filmDetailsPage from './js/pages/filmDetailsPage';
+
+window['router'] = new Router({
+  root: '/',
+  routes: [
+    {
+      path: /тренды\/(.*)/,
+      callback: (id) => {},
+    },
+    {
+      path: '',
+      callback: () => {},
+    },
+  ],
+});
+
+window['router'].navigate('feed/2');

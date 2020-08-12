@@ -10,14 +10,30 @@ window['router'] = new Router({
   root: '/',
   routes: [
     {
-      path: /тренды\/(.*)/,
-      callback: (id) => {},
+      path: /movies\/(.*)/,
+      callback: id => {
+        console.log(`movies/${id}`);
+      },
+    },
+    {
+      path: 'library',
+      callback: id => {
+        console.log(`library`);
+      },
+    },
+    {
+      path: 'movies',
+      callback: () => {
+        console.log('movies');
+      },
     },
     {
       path: '',
-      callback: () => {},
+      callback: () => {
+        initialHomePage();
+      },
     },
   ],
 });
 
-window['router'].navigate('feed/2');
+window['router'].navigate('library');

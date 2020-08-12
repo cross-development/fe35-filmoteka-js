@@ -1,11 +1,27 @@
-html {
-  box-sizing: border-box;
-}
-
+//Reset scss
 *,
 *::before,
 *::after {
-  box-sizing: inherit;
+  box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
+
+// Utils
+@import 'utils/variables';
+@import 'utils/mixins';
+@import 'utils/placeholder';
+
+// Base styles
+@import 'normalize';
+@import 'fonts';
+
+// Partials
+@import 'partials/header';
+@import 'partials/main';
+@import 'partials/footer';
+
+//Views
+@import 
+
+// Components

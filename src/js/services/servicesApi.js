@@ -7,8 +7,8 @@ const baseURL = 'https://api.themoviedb.org/3';
 // Ф-ция возвращает массив объектов, описание объекта в файле descriptions_API.txt
 const fetchPopularMovies = (page = 1) => {
   return fetch(
-    `${baseURL}/movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`,
-  )
+      `${baseURL}/movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`,
+    )
     .then(response => response.json())
     .then(data => data.results);
 };
@@ -26,8 +26,8 @@ const fetchGenres = () => {
 // Ф-ция возвращает массив объектов, описание объекта в файле descriptions_API.txt
 const fetchMovies = (searchQuery, page = 1) => {
   return fetch(
-    `${baseURL}/search/movie?api_key=${API_KEY}&language=en-US&query=${searchQuery}&page=${page}&include_adult=false`,
-  )
+      `${baseURL}/search/movie?api_key=${API_KEY}&language=en-US&query=${searchQuery}&page=${page}&include_adult=false`,
+    )
     .then(response => response.json())
     .then(data => data.results);
 };

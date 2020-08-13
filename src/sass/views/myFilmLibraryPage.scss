@@ -1,0 +1,124 @@
+.container {
+  width: 320px;
+  margin: 0 auto;
+}
+
+.main__list {
+  list-style: none;
+  padding: 20px 0 30px 0;
+  margin: 0;
+
+}
+
+.main__item-block {
+  width: 300px;
+  height: 160px;
+  overflow: hidden;
+  position: relative;
+  margin: 20px;
+  padding: 20px;
+}
+
+.main__item-img {
+  display: inline-block;
+  height: auto;
+  width: 100%;
+
+}
+
+.main__item-about-list {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  list-style: none;
+
+}
+
+
+.main__item-title {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+}
+
+.main__about-item {
+  color: white;
+}
+
+
+// .main__item {
+//   @media (max-width: 767px) {
+//     margin-bottom: 18px;
+//     width: 100%;
+
+//     &:last-of-type {
+//       margin-bottom: 0;
+//     }
+//   }
+
+//   @media (min-width: 768px) {
+//     margin-bottom: 28px;
+//     width: 47.75%;
+
+//     &:nth-last-of-type(-n + 2) {
+//       margin-bottom: 0;
+//     }
+//   }
+
+//   @media (min-width: 1024px) {
+//     width: 31.05%;
+
+//     &:nth-last-of-type(-n + 3) {
+//       margin-bottom: 0;
+//     }
+
+//     &:last-of-type {}
+//   }
+
+//   &-link {
+//     @extend %link;
+//     width: 100%;
+//     // font-family: $main-text-font;
+//     font-size: 0.857em;
+//     line-height: 1.33;
+//   }
+
+//   &-img {
+//     display: block;
+//     width: 100%;
+//     height: auto;
+//     margin-bottom: 10px;
+//     border-radius: 5px;
+//   }
+
+//   &-title {
+//     // color: $poster-title-color;
+//     text-transform: uppercase;
+//     margin-bottom: 5px;
+//   }
+
+//   &-about-list {
+//     @extend %list;
+//     display: flex;
+//     justify-content: flex-start;
+//     align-items: center;
+//     // color: $poster-about-color;
+//     text-transform: capitalize;
+//     position: relative;
+//   }
+// }
+
+// .main__about-item {
+//   padding: 0 2px;
+// }
+
+// .main__about-vote {
+//   // background-color: $poster-about-color;
+//   color: #fff;
+//   margin-left: 2px;
+//   padding: 2px 9px;
+//   border-radius: 5px;
+//   position: relative;
+//   bottom: 2px;
+// }

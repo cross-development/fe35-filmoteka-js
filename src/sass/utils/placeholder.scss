@@ -1,0 +1,29 @@
+%list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+%link {
+  display: inline-block;
+  text-decoration: none;
+}
+
+%button {
+  border: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+
+//для кнопок на страничке details
+%detailsBtn {
+  @extend %button;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  text-transform: uppercase;
+  border-radius: 5px;
+  outline: none;
+}

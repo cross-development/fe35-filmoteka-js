@@ -13,7 +13,7 @@ function getDataObject(data) {
     return {
       poster_path: `https://image.tmdb.org/t/p/w500${el.poster_path}`,
       title: el.title,
-      release_year: el.release_date,
+      release_year: el.release_date.split("-")[0],
       vote_average: el.vote_average,
     };
   });

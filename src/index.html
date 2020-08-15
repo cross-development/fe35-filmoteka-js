@@ -39,26 +39,29 @@
             </form>
         </div>
 
+        <div class="header-btn-container">
+            <button class="header-big-btn" data-toggle="watched">Watched</button>
+            <button class="header-big-btn" data-toggle="queue">Queue</button>
+        </div>
+
         <div id="result">
             <!-- Тут будет рендер динамического контента -->
         </div>
 
-        <div id="js-paginationContainer" class="paginationContainer">
+        <div class="paginationContainer">
             <button data-move="prev" class="nav_btn prev">Prev</button>
-            <p id="js-paginationPageNumber" class="paginationPageNumber">
-                1
-            </p>
+            <p id="js-paginationPageNumber" class="paginationPageNumber">1</p>
             <button data-move="next" class="nav_btn next">Next</button>
         </div>
     </main>
 
+    <footer class="footer" id="footer">
+        <div class="author">Made by <a href="/">FE35</a></div>
+    </footer>
+
     <div class="scrollUp">
         <!-- <i class="fa fa-chevron-up" aria-hidden="true"></i> -->
     </div>
-
-    <footer class="footer" id="footer">
-        <div class="author">Made by FE35</div>
-    </footer>
 
     <script id="filmsTemplate" type="text/template">
         <section id="js-homePage" class="main__homePage">  

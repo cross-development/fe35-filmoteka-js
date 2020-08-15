@@ -1,10 +1,10 @@
 <div class="container">
-  <div class="header-btn-container d-n">
-    <button class="header-big-btn" href="#">
-      watched
+  <div class="header-btn-container">
+    <button class="header-big-btn header-btn-hover" href="#">
+      Watched
     </button>
-    <button class="header-big-btn" href="#">
-      queue
+    <button class="header-big-btn header-btn-hover" href="#">
+      Queue
     </button>
   </div>
   <ul class="main__list">
@@ -25,3 +25,28 @@
     {{/each}}
   </ul>
 </div>
+
+
+
+
+
+const buildMainHTML = () => {
+return `
+<div class="container">
+  <div class="header-btn-container d-n">
+    <button class="header-big-btn header-btn-hover" href="#">
+      Watched
+    </button>
+    <button class="header-big-btn header-btn-hover" href="#">
+      Queue
+    </button>
+    `;
+    };
+
+    const buildMainHTML = (short_url, long_url, created_at) => {
+    return `
+    <p>Short URL: <a href="${short_url}">${short_url}</a></p>
+    <p>Long URL: ${long_url}</p>
+    <p>Created at: ${new Date(created_at)}</p>
+    `;
+    };

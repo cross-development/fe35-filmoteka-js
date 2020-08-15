@@ -63,6 +63,16 @@ export default {
 // Функция получает номер страницы и забирает список популярных фильмов.
 // Если не передали номер страницы, по дефолту он = 1
 // Ф-ция возвращает массив объектов, описание объекта в файле descriptions_API.txt
+<<<<<<< HEAD
+=======
+const fetchPopularMovies = (page = 1) => {
+  return fetch(
+      `${baseURL}/movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`,
+    )
+    .then(response => response.json())
+    .then(data => data.results);
+};
+>>>>>>> 29684b85fcbcfe1ffe332cafe147d460bf80536d
 
 // Функция ничего не получает, забирает список жанров.
 // Функция возвращает массив объектов, описание объекта в файле descriptions_API.txt
@@ -70,6 +80,16 @@ export default {
 // Функция получает номер страницы и строку запроса, забирает список фильмов по запросу.
 // Если не передали номер страницы, по дефолту он = 1
 // Ф-ция возвращает массив объектов, описание объекта в файле descriptions_API.txt
+<<<<<<< HEAD
+=======
+const fetchMovies = (searchQuery, page = 1) => {
+  return fetch(
+      `${baseURL}/search/movie?api_key=${API_KEY}&language=en-US&query=${searchQuery}&page=${page}&include_adult=false`,
+    )
+    .then(response => response.json())
+    .then(data => data.results);
+};
+>>>>>>> 29684b85fcbcfe1ffe332cafe147d460bf80536d
 
 // Функция получает айдишник фильма и возвращает объект с деталями выбранного фильма.
 // Описание объекта в файле descriptions_API.txt

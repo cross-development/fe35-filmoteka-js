@@ -1,0 +1,9 @@
+{{#each this}}
+<li class="movieItem">
+    <div class="moviePoster">
+        <img src="https://image.tmdb.org/t/p/w500{{poster_path}}" alt="{{type}} by {{user}}" class="moviePoster" />
+
+        <p class="stats-item">{{original_title}} {{release_date}}</p>
+    </div>
+</li>
+{{/each}}

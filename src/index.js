@@ -1,18 +1,19 @@
 'use strict';
 
 import { Router } from './js/router/router';
+import './sass/base.scss';
 
 import initialHomePage from './js/pages/initialHomePage';
-import libraryPage from './js/pages/libraryPage';
+// import libraryPage from './js/pages/libraryPage';
 import filmDetailsPage from './js/pages/filmDetailsPage';
-
+// console.log(initialHomePage);
 window['router'] = new Router({
   root: '/',
   routes: [
     {
       path: /movies\/(.*)/,
       callback: id => {
-        console.log(`movies/${id}`);
+        filmDetailsPage(id);
       },
     },
     {
@@ -29,11 +30,9 @@ window['router'] = new Router({
     },
     {
       path: '',
-      callback: () => {
-        initialHomePage();
-      },
+      callback: () => initialHomePage(),
     },
   ],
 });
 
-window['router'].navigate('library');
+// window['router'].navigate('movies/2');

@@ -1,0 +1,20 @@
+<div class="movieWrapper">
+    <div class="posterWrapper">
+        <img src="https://image.tmdb.org/t/p/w500{{poster_path}}" alt="{{title}}" />
+    </div>
+
+    <div class="detailsWrapper">
+        <h1>{{title}} ({{release_date}})</h1>
+        <p>vote / votes {{vote_average}} / {{vote_count}}</p>
+        <p>popularity {{popularity}}</p>
+        <p>original title {{original_title}}</p>
+        <ul class="tag-list">
+            genres
+            {{#each genres}}
+            <li class="tag-list__item">{{this}}</li>
+            {{/each}}
+        </ul>
+        <h2>About</h2>
+        <p>{{overview}}</p>
+    </div>
+</div>

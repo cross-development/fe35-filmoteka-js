@@ -13,7 +13,23 @@
   <header class="header" id="header"></header>
 
   <!-- Тут будет импортироваться динамический контект из папки views -->
-  <main class="main" id="main"></main>
+  <main class="main" id="main">
+    <!-- homePage markup -->
+    <section id="js-homePage" class="main__homePage">
+      <form id="form">
+        <button class="formButton" type="submit">Search</button>
+        <input class="formInput" name="query" type="text" placeholder="Write movie name and click Enter">
+      </form>
+
+      <ul class="moviesList"></ul>
+
+      <div class="pagination" style="display: flex; justify-content: center;">
+        <button class="prevMovie" data-move="prev">Prev</button>
+        <p class="currentPage" data-page>1</p>
+        <button class="nextMovie" data-move="next">Next</button>
+      </div>
+    </section>
+  </main>
 
   <!-- Тут будет импортироваться контект с footer из папки partials -->
   <footer class="footer" id="footer"></footer>

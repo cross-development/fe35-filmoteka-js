@@ -8,7 +8,6 @@ import './sass/base.scss';
 
 Router.init();
 
-
 // Я очень надеюсь что этот код когда то пригодится (нет)
 
 // const resultNode = document.querySelector('#result');

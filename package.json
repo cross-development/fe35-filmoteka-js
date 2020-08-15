@@ -6,6 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --env.mode development --config ./webpack/config.js",
     "build": "webpack --env.mode production --config ./webpack/config.js",
+    "prettier": "prettier --single-quote --use-tabs --trailing-comma es5 --write ./src/**/*.js",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },

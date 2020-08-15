@@ -2,15 +2,9 @@
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-img {
-  display: block;
-  max-width: 100%;
-  height: auto;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
 // Utils
@@ -26,11 +20,10 @@ img {
 @import 'partials/header';
 @import 'partials/main';
 @import 'partials/footer';
+@import 'partials/goTop';
 
-//Views
-<<<<<<< HEAD
-=======
-@import 'views/myFilmLibraryPage';
->>>>>>> 29684b85fcbcfe1ffe332cafe147d460bf80536d
-
-// Components
+//Pages
+@import 'views/homePage';
+@import 'views/detailsPage';
+@import 'views/filmsPage';
+@import 'views/libraryPage';

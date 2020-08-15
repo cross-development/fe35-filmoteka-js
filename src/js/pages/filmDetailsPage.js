@@ -1,31 +1,14 @@
-import servicesApi from '../services/servicesApi';
-import detailsPage from '../../templates/pages/detailsPage.hbs';
+import View from '../views/view';
 
-const refs = {
-  main: document.querySelector('#main'),
-  homePage: document.querySelector('#js-homePage'),
+const resultNode = document.querySelector('#result');
+let film = [];
+
+export default {
+    setData(newFilm) {
+        film = newFilm;
+    },
+
+    render() {
+        resultNode.innerHTML = View.render('filmDetails', film);
+    },
 };
-
-function fetchMovieDetail() {
-  servicesApi
-    .fetchMoviesDetails()
-    .then(showDetails)
-    .catch(e => console.log(e));
-}
-
-function showDetails(selectFilm) {
-  const markup = detailsPage(selectFilm);
-
-  refs.homePage.style.display = 'none';
-  refs.main.insertAdjacentHTML('beforeend', markup);
-  //   monitorButtonStatusText();
-}
-
-function filmDetailsPage(movieId) {
-  console.log(movieId);
-  servicesApi.movieId = movieId;
-
-  fetchMovieDetail();
-}
-
-export default filmDetailsPage;

@@ -1,11 +1,12 @@
 import View from '../views/view';
 
 const resultNode = document.querySelector('#result');
+
 let items = [];
 
 export default {
-    setData(newItems) {
-        items = newItems;
+    setData(filmsItems) {
+        items = filmsItems;
     },
 
     render() {

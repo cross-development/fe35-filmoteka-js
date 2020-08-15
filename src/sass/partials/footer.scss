@@ -1,0 +1,36 @@
+div.scrollUp {
+  position: fixed;
+  color: white;
+  background-color: #8ecbc6;
+  padding: 10px 15px;
+  font-size: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  right: 15px;
+  bottom: 18px;
+}
+
+.footer {
+  background-color: #77c1bb;
+  height: 85px;
+  width: 100%;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+}
+
+.author {
+  font-size: 16px;
+  color: #372c48;
+  font-family: 'Roboto';
+  text-align: center;
+  margin-top: 32px;
+}
+
+@media (min-width: 768px) {
+  div.scrollup {
+    display: none;
+  }
+}

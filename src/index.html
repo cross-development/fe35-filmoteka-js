@@ -2,41 +2,103 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Filmoteka FE-35 JS</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <title>Filmoteka</title>
 </head>
 
 <body>
-  <!-- Тут будет импортироваться контект с header из папки partials -->
-  <header class="header" id="header"></header>
+    <header class="header" id="header">
+        <div class="logo-name">
+            <p class="logo"><a href="#home"><img src="./images/logo.png" alt="Logo"></a></p>
+            <p class="name">Filmoteka</p>
+        </div>
 
-  <!-- Тут будет импортироваться динамический контект из папки views -->
-  <main class="main" id="main">
-<<<<<<< HEAD
-    <!-- homePage markup -->
-    <section id="js-homePage" class="main__homePage">
-      <form id="form">
-        <button class="formButton" type="submit">Search</button>
-        <input class="formInput" name="query" type="text" placeholder="Write movie name and click Enter">
-      </form>
+        <nav class="nav">
+            <li class="menu_item">
+                <a data-role="nav-home" href="#home">Home</a>
+            </li>
+            <li class="menu_item">
+                <a data-role="nav-films" href="#films">Films</a>
+            </li>
+            <li class="menu_item">
+                <a data-role="nav-library" href="#library">My library</a>
+            </li>
+        </nav>
+    </header>
 
-      <ul class="moviesList"></ul>
+    <main class="main" id="main">
+        <div class="searchbar">
+            <form id="js-form" class="main__form">
+                <button class="formButton" type="submit">
+                    <span class="searchFormButtonLabel">Search</span>
+                </button>
+                <input class="formInput" name="query" type="text" autocomplete="off"
+                    placeholder="Write movie name and click Enter">
+            </form>
+        </div>
 
-      <div class="pagination" style="display: flex; justify-content: center;">
-        <button class="prevMovie" data-move="prev">Prev</button>
-        <p class="currentPage" data-page>1</p>
-        <button class="nextMovie" data-move="next">Next</button>
-      </div>
-    </section>
-=======
-    <div id="postersViewer"></div>
->>>>>>> 29684b85fcbcfe1ffe332cafe147d460bf80536d
-  </main>
+        <div id="result">
+            <!-- Тут будет рендер динамического контента -->
+        </div>
 
-  <!-- Тут будет импортироваться контект с footer из папки partials -->
-  <footer class="footer" id="footer"></footer>
+        <div id="js-paginationContainer" class="paginationContainer">
+            <button data-move="prev" class="nav_btn prev">Prev</button>
+            <p id="js-paginationPageNumber" class="paginationPageNumber">
+                1
+            </p>
+            <button data-move="next" class="nav_btn next">Next</button>
+        </div>
+    </main>
+
+    <div class="scrollUp">
+        <!-- <i class="fa fa-chevron-up" aria-hidden="true"></i> -->
+    </div>
+
+    <footer class="footer" id="footer">
+        <div class="author">Made by FE35</div>
+    </footer>
+
+    <script id="filmsTemplate" type="text/template">
+        <section id="js-homePage" class="main__homePage">  
+            <ul class="filmsList">
+                {{#each this}}
+                <li class="filmItem">
+                    <a href="#films/{{id}}" class="itemLink">
+                        <img src="https://image.tmdb.org/t/p/w500{{poster_path}}" alt="{{original_title}}" class="filmPoster">
+                        <span>{{original_title}} ({{formatReleaseDate release_date}})</span>
+                    </a>
+                </li>
+                {{/each}}
+            </ul>
+        </section>
+    </script>
+
+    <script id="filmDetailsTemplate" type="text/template">
+        <section class="movie_wrapper">
+            <div class="poster_wrapper">
+                <img src="https://image.tmdb.org/t/p/w500{{formatFilmPoster poster_path}}" alt="{{title}}" />
+            </div>
+        
+            <div class="details_wrapper">
+                <h1>{{title}} ({{formatReleaseDate release_date}})</h1>
+                <p>vote / votes {{vote_average}} / {{vote_count}}</p>
+                <p>popularity {{popularity}}</p>
+                <p>original title {{original_title}}</p>
+                <ul class="genres_list">
+                    genres
+                    {{#each genres}}
+                    <li class="genres_list__item">{{name}}</li>
+                    {{/each}}
+                </ul>
+                <h2>About</h2>
+                <p>{{overview}}</p>
+            </div>
+            
+            
+        </section>
+    </script>
 </body>
 
 </html>

@@ -1,46 +1,25 @@
-export class Router {
-  constructor({ root, routes }) {
-    this.root = root || '/';
-    this.routes = routes || [];
-    this.listen();
-  }
+import Controller from '../controllers/controller';
 
-  removeCornerSlashes = path =>
-    path.toString().replace(/\/$/, '').replace(/^\//, '');
+function getRouteInfo() {
+    const hash = location.hash ? location.hash.slice(1) : '';
+    const [name, id] = hash.split('/');
 
-  getFragment() {
-    let fragment = this.removeCornerSlashes(
-      decodeURI(window.location.pathname + window.location.search),
-    );
-    fragment = fragment.replace(/\?(.*)$/, '');
-    fragment = this.root !== '/' ? fragment.replace(this.root, '') : fragment;
-    return this.removeCornerSlashes(fragment);
-  }
-
-  navigate(path = '') {
-    window.history.pushState(
-      null,
-      null,
-      this.root + this.removeCornerSlashes(path),
-    );
-  }
-
-  listen() {
-    clearInterval(this.interval);
-    this.interval = setInterval(this.interval.bind(this), 50);
-  }
-
-  interval() {
-    if (this.current === this.getFragment()) return;
-    this.current = this.getFragment();
-    this.routes.some(route => {
-      const match = this.current.match(route.path);
-      if (match) {
-        match.shift();
-        route.callback.apply({}, match);
-        return match;
-      }
-      return false;
-    });
-  }
+    return { name, params: { id } };
 }
+
+function handleHash() {
+    const { name, params } = getRouteInfo();
+
+    if (name) {
+        const routeName = name + 'Route';
+        Controller[routeName](params);
+    }
+}
+
+export default {
+    init() {
+        //если что-то пойдет не так с раутами - убрать виндов
+        window.addEventListener('hashchange', handleHash);
+        handleHash();
+    },
+};

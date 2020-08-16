@@ -43,18 +43,17 @@
     top: 10px;
     right: 10px;
     border-radius: 6px;
-    background-color: rgb(255, 255, 255);
-    box-shadow: inset 0px 0px 2.79px 0.21px rgba(0, 0, 0, 0.35),
-        inset 0px 0px 2.64px 1.36px rgba(0, 0, 0, 0.35);
+    background-color: $prymary-light-color;
+    box-shadow: inset 0px 0px 2.79px 0.21px rgba(0, 0, 0, 0.35), inset 0px 0px 2.64px 1.36px rgba(0, 0, 0, 0.35);
     font-size: 20px;
-    color: rgb(0, 0, 0);
+    color: $prymary-dark-color;
     line-height: 0.933;
     text-align: center;
 }
 
 .main__about-item {
     font-size: 15px;
-    color: #ffffff;
+    color: $prymary-light-color;
     line-height: 1.2;
     text-align: left;
 }
@@ -63,20 +62,19 @@
     display: flex;
     padding: 0.5em 0;
     justify-content: center;
-    background-color: rgb(243, 246, 246);
+    background-color: $bg-second-color;
     box-shadow: 0px 5px 9px 1px rgba(0, 0, 0, 0.23);
 }
 
 .header-big-btn {
     font-size: 16px;
-    color: rgb(0, 0, 0);
+    color: $prymary-dark-color;
     width: 140px;
     height: 40px;
     border: 2px solid #8ed5dd;
     display: block;
     border-radius: 4px;
-    background-color: white;
-    background-color: rgb(243, 246, 246);
+    background-color: $bg-second-color;
     cursor: pointer;
     transition: all 250ms linear;
 }
@@ -86,19 +84,17 @@
 }
 
 .header-big-btn:hover {
-    background-color: rgb(119, 193, 187);
-    color: rgb(255, 255, 255);
+    background-color: $bigBTN-hover-color;
+    color: $prymary-light-color;
 }
 
 @media (max-width: 767px) {
     .container {
         width: 300px;
     }
-
     .main__list {
         width: 300px;
     }
-
     .main__item {
         height: 160px;
         width: 300px;
@@ -112,18 +108,15 @@
         width: 715px;
         height: auto;
     }
-
     .main__item {
         width: 345px;
         height: 180px;
     }
-
     .main__list {
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
     }
-
     .main__item-about-list {
         bottom: 30px;
     }
@@ -134,17 +127,14 @@
         width: 965px;
         height: 245px;
     }
-
     .main__item {
         width: 470px;
         height: 245px;
         margin-bottom: 15px;
     }
-
     .main__item-img {
         height: 245px;
     }
-
     .main__item-about-list {
         bottom: 10px;
     }

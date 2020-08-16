@@ -21,8 +21,7 @@
     align-items: stretch;
     min-height: 100%;
     padding: 5px 20px;
-    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
-        0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
 
 .detailsWrapper h1 {
@@ -52,7 +51,7 @@
 
 .film_btn {
     font-size: 16px;
-    color: #000000;
+    color: $prymary-dark-color;
     font: 1em sans-serif;
     width: 220px;
     text-transform: uppercase;
@@ -61,8 +60,8 @@
     display: block;
     outline: none;
     border-radius: 4px;
-    background-color: white;
-    background-color: rgb(243, 246, 246);
+    background-color: $prymary-light-color;
+    background-color: $bg-second-color;
     cursor: pointer;
     transition: all 250ms linear;
 }
@@ -72,56 +71,19 @@
 }
 
 .film_btn:hover {
-    background-color: rgb(119, 193, 187);
-    color: rgb(255, 255, 255);
+    background-color: $bg-prymary-color;
+    color: $prymary-light-color;
 }
-
-// .film_btn {
-//     position: relative;
-//     display: inline-block;
-//     width: 40em;
-//     padding: 2px 0;
-//     text-transform: uppercase;
-//     line-height: 2em;
-//     font-weight: bold;
-//     text-align: center;
-//     text-decoration: none;
-//     cursor: pointer;
-//     color: #212121;
-//     outline: none;
-//     border: none;
-//     border-radius: 5px;
-//     box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.7),
-//         0px 1px 1px 0px rgba(0, 0, 0, 0.24), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
-//     background: #8ed5dd;
-//     transition: all 250ms linear;
-// }
-
-// .film_btn:hover {
-//     box-shadow: 0 0 0 60px rgba(0, 0, 0, 0) inset, 0.1em 0.1em 0.2em #212121;
-// }
 
 @media (min-width: 768px) {
     .movie_wrapper {
         flex-direction: row;
     }
-
     .poster_wrapper {
         margin-bottom: 0;
         flex: 0 0 35%;
     }
-
     .details_wrapper {
         flex: 0 0 65%;
     }
-}
-
-@media (min-width: 1440px) {
-    .poster_wrapper {
-        // flex: 0 0 19%;
-    }
-
-    // .details_wrapper {
-    //     flex: 0 0 78%;
-    // }
 }

@@ -44,7 +44,15 @@ function searchFilms(e) {
     Model.searchQueryMovies = searchQuery;
 
     Model.fetchMovies().then(resultMoviesData => {
+        if (resultMoviesData===undefined || resultMoviesData.length===0) {
+            refs.pagination.style.visibility = 'hidden';
+            // filmsPage.setData(MARKUP);
+
+            // filmsPage.render();
+
+        }
         filmsPage.setData(resultMoviesData);
+
         filmsPage.render();
         refs.pagination.style.display = 'flex';
         refs.pagination.firstElementChild.style.visibility = 'hidden';

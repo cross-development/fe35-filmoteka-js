@@ -1,7 +1,7 @@
 div.scrollUp {
     position: fixed;
-    color: white;
-    background-color: #8ecbc6;
+    color: $prymary-light-color;
+    background-color: $buttonUP-color;
     padding: 10px 15px;
     font-size: 20px;
     border-radius: 50%;
@@ -13,7 +13,7 @@ div.scrollUp {
 }
 
 .footer {
-    background-color: #77c1bb;
+    background-color: $bg-prymary-color;
     height: 85px;
     width: 100%;
     text-align: center;
@@ -23,7 +23,7 @@ div.scrollUp {
 
 .author {
     font-size: 16px;
-    color: #372c48;
+    color: $second-dark-color;
     text-align: center;
     margin-top: 32px;
 }

@@ -10,7 +10,6 @@
     text-transform: uppercase;
     display: none;
     color: #372c48;
-    font-family: 'Roboto';
     font-weight: 600;
     font-size: 20px;
 }
@@ -35,11 +34,14 @@
     display: block;
 }
 
+a.active {
+    color: #fff;
+}
+
 .header {
     background-color: #77c1bb;
     height: 65px;
     width: 100%;
-    font-family: 'Roboto';
     font-weight: 600;
     position: fixed;
     z-index: 100000;
@@ -50,21 +52,25 @@
     justify-content: space-between;
 }
 
-.menu_item::after {
+.menu_item a::after {
     content: '';
     position: absolute;
     bottom: -10px;
     left: 0;
     display: block;
-    background: #372c48;
     height: 3px;
     width: 100%;
     opacity: 0;
     transition: all 250ms linear;
 }
 
-.menu_item:hover::after {
+.menu_item a:hover::after {
+    background: #372c48;
     opacity: 1;
+}
+
+.menu_item a.active:hover::after {
+    background: #fff;
 }
 
 @media (min-width: 768px) {

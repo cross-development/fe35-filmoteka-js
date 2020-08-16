@@ -56,7 +56,7 @@
     </main>
 
     <footer class="footer" id="footer">
-        <div class="author">Made by <a href="/">FE35</a></div>
+        <div class="author">Made by <a href="https://goit-fe35-our-teem.netlify.app/" target="_blank">FE35</a></div>
     </footer>
 
     <div class="scrollUp">
@@ -69,7 +69,7 @@
                 {{#each this}}
                 <li class="filmItem">
                     <a href="#films/{{id}}" class="itemLink">
-                        <img src="https://image.tmdb.org/t/p/w500{{poster_path}}" alt="{{original_title}}" class="filmPoster">
+                        <img src="{{formatFilmPoster poster_path}}" alt="{{original_title}}" class="filmPoster">
                         <span>{{original_title}} ({{formatReleaseDate release_date}})</span>
                     </a>
                 </li>
@@ -81,7 +81,7 @@
     <script id="filmDetailsTemplate" type="text/template">
         <section class="movie_wrapper">
             <div class="poster_wrapper">
-                <img src="https://image.tmdb.org/t/p/w500{{formatFilmPoster poster_path}}" alt="{{title}}" />
+                <img src="{{formatFilmPoster poster_path}}" alt="{{title}}" />
             </div>
         
             <div class="details_wrapper">
@@ -95,8 +95,10 @@
                     <li class="genres_list__item">{{name}}</li>
                     {{/each}}
                 </ul>
-                <h2>About</h2>
-                <p>{{overview}}</p>
+                <div class="overview">
+                    <h2>About</h2>
+                    <p>{{overview}}</p>
+                </div>
             </div>
             
             

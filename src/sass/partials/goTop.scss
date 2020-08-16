@@ -1,13 +1,13 @@
 .scrollUp {
     position: fixed;
-    color: $prymary-light-color;
+    color: $primary-light-color;
     background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRfI8I0fHC5dbpEbq9CMoUfhN0W4WyiYe18ag&usqp=CAU');
     background-size: contain;
     background-color: $buttonUP-color;
-    z-index: 9999;
+    z-index: 8888;
     font-size: 20px;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50px;
     cursor: pointer;
     text-align: center;

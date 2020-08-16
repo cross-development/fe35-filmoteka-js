@@ -1,5 +1,5 @@
 .footer {
-    background-color: $bg-prymary-color;
+    background-color: $bg-primary-color;
     height: 85px;
     width: 100%;
     text-align: center;
@@ -12,10 +12,4 @@
     color: $second-dark-color;
     text-align: center;
     margin-top: 32px;
-}
-
-@media (min-width: 768px) {
-    div.scrollup {
-        display: none;
-    }
 }

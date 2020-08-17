@@ -2,6 +2,7 @@
 import refs from '../controllers/controllerRefs';
 
 let activeNavNode;
+
 //Control mode settings
 function setActiveNavNode(node, activeClass) {
     if (activeNavNode) {
@@ -54,6 +55,7 @@ function getDataFromLS(key, filmId) {
                 const targetBtn = document.querySelector(
                     `button[data-status="${key}"]`,
                 );
+
                 return toggleBtnMark(targetBtn, key);
             }
         });
@@ -100,6 +102,11 @@ function getFilmsFromLibrary(e) {
     if (isWatchedBtnSelect || isQueueBtnSelect) {
         const existFavList = localStorage.getItem(key);
         const parsedData = JSON.parse(existFavList);
+
+        const targetBtn = document.querySelector(
+            `button[data-toggle="${key === 'watched' ? 'queue' : 'watched'}"]`,
+        );
+        targetBtn.classList.remove('activeBtn');
 
         if (!existFavList || parsedData.length < 1) {
             localStorage.removeItem(key);

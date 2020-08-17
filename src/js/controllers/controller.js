@@ -147,6 +147,10 @@ export default {
         refs.libraryControls.style.display = 'flex';
         refs.resultsView.innerHTML = '';
 
+        Array.from(refs.libraryControls.children).map(child =>
+            child.classList.remove('activeBtn'),
+        );
+
         refs.libraryControls.addEventListener('click', e => {
             if (e.target.nodeName !== 'BUTTON') {
                 return;
@@ -156,8 +160,9 @@ export default {
 
             if (!existData) {
                 refs.resultsView.innerHTML = '';
+
                 setActiveNavNode(refs.libraryNavNode, 'active');
-                // setActiveNavNode(e.target, 'activeBtn');
+
                 return openWarningModalWindow(
                     `${e.target.textContent} list is empty. Add movies there.`,
                 );
@@ -165,10 +170,11 @@ export default {
 
             libraryPage.setData(existData);
             libraryPage.render();
-            // setActiveNavNode(e.target, 'activeBtn');
+
+            setActiveNavNode(e.target, 'activeBtn');
             setActiveNavNode(refs.libraryNavNode, 'active');
         });
-        // setActiveNavNode(e.target, 'activeBtn');
+
         setActiveNavNode(refs.libraryNavNode, 'active');
     },
 };

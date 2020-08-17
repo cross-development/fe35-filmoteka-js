@@ -14,5 +14,8 @@
     font-size: 16px;
     color: $second-dark-color;
     text-align: center;
-    // margin-top: 32px;
+    
+    & a {
+        text-decoration: none;
+    }
 }

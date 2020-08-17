@@ -53,6 +53,19 @@ export default {
         return data.results;
     },
 
+    async fetchUpcomingFilm() {
+        try {
+            const response = await fetch(
+                `${baseURL}/movie/upcoming?api_key=${API_KEY}&language=en-US&page=1`,
+            );
+            const data = await response.json();
+
+            return data.results;
+        } catch (error) {
+            console.log('error:' + error.message);
+        }
+    },
+
     get searchQueryMovies() {
         return this.query;
     },

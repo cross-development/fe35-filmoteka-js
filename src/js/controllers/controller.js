@@ -4,6 +4,8 @@ import refs from './controllerRefs';
 //Settings
 import { getDataFromLS } from '../settings/settings';
 import { addFilmToLibrary } from '../settings/settings';
+import { setActiveNavNode } from '../settings/settings';
+import { controlDisplayNode } from '../settings/settings';
 import { getFilmsFromLibrary } from '../settings/settings';
 //Pages
 import homePage from '../pages/homePage';
@@ -14,33 +16,17 @@ import filmDetailsPage from '../pages/filmDetailsPage';
 import createFilmControls from '../components/filmControls';
 import { openWarningModalWindow } from '../components/modalWindow';
 import { closeWarningModalWindow } from '../components/modalWindow';
-
+//Refs
+refs.scrollUp.addEventListener('click', scrollUp);
 refs.movieForm.addEventListener('submit', searchFilms);
 refs.pagination.addEventListener('click', paginationNavigation);
-refs.scrollUp.addEventListener('click', scrollUp);
 refs.modalWindow.addEventListener('click', closeWarningModalWindow);
-
-let activeNavNode;
 
 function scrollUp() {
     window.scrollTo({
         top: 0,
         behavior: 'smooth',
     });
-}
-
-function setActiveNavNode(node) {
-    if (activeNavNode) {
-        activeNavNode.classList.remove('active');
-    }
-
-    activeNavNode = node;
-    activeNavNode.classList.add('active');
-}
-
-function controlDisplayNode(mode) {
-    refs.searchForm.style.display = `${mode}`;
-    refs.pagination.style.display = `${mode}`;
 }
 
 function searchFilms(e) {
@@ -51,7 +37,7 @@ function searchFilms(e) {
     const searchQuery = input.value;
 
     if (!searchQuery) {
-        return openWarningModalWindow();
+        return openWarningModalWindow('Please, enter query.');
     }
 
     Model.searchQueryMovies = searchQuery;
@@ -59,7 +45,7 @@ function searchFilms(e) {
     Model.fetchMovies().then(resultMoviesData => {
         if (!resultMoviesData || resultMoviesData.length === 0) {
             refs.pagination.style.visibility = 'hidden';
-            openWarningModalWindow();
+            openWarningModalWindow('No matches found. Make another query.');
         }
 
         filmsPage.setData(resultMoviesData);
@@ -113,7 +99,9 @@ export default {
         homePage.setData(popularMovies);
         homePage.render();
 
-        setActiveNavNode(refs.homeNavNode);
+        document.querySelector('.section-title').textContent = 'Popular Films';
+
+        setActiveNavNode(refs.homeNavNode, 'active');
     },
 
     async filmsRoute(params) {
@@ -135,14 +123,22 @@ export default {
                 addFilmToLibrary(e, filmDetails);
             });
 
-            setActiveNavNode(refs.filmsNavNode);
+            setActiveNavNode(refs.filmsNavNode, 'active');
         } else {
             controlDisplayNode('flex');
             refs.libraryControls.style.display = 'none';
             refs.pagination.style.display = 'none';
             refs.resultsView.innerHTML = '';
 
-            setActiveNavNode(refs.filmsNavNode);
+            const upcomingFilms = await Model.fetchUpcomingFilm();
+
+            filmsPage.setData(upcomingFilms);
+            filmsPage.render();
+
+            document.querySelector('.section-title').textContent =
+                'Upcoming Films';
+
+            setActiveNavNode(refs.filmsNavNode, 'active');
         }
     },
 
@@ -160,13 +156,19 @@ export default {
 
             if (!existData) {
                 refs.resultsView.innerHTML = '';
-                return openWarningModalWindow();
+                setActiveNavNode(refs.libraryNavNode, 'active');
+                // setActiveNavNode(e.target, 'activeBtn');
+                return openWarningModalWindow(
+                    `${e.target.textContent} list is empty. Add movies there.`,
+                );
             }
 
             libraryPage.setData(existData);
             libraryPage.render();
+            // setActiveNavNode(e.target, 'activeBtn');
+            setActiveNavNode(refs.libraryNavNode, 'active');
         });
-
-        setActiveNavNode(refs.libraryNavNode);
+        // setActiveNavNode(e.target, 'activeBtn');
+        setActiveNavNode(refs.libraryNavNode, 'active');
     },
 };

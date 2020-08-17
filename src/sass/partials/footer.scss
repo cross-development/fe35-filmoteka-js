@@ -1,15 +1,18 @@
 .footer {
     background-color: $bg-primary-color;
-    height: 85px;
+    height: 70px;
     width: 100%;
     text-align: center;
     position: fixed;
     bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .author {
     font-size: 16px;
     color: $second-dark-color;
     text-align: center;
-    margin-top: 32px;
+    // margin-top: 32px;
 }

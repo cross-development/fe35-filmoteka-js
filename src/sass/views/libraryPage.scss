@@ -73,6 +73,7 @@
     height: 40px;
     border: 2px solid #8ed5dd;
     display: block;
+    outline: none;
     border-radius: 4px;
     background-color: $bg-second-color;
     cursor: pointer;
@@ -82,7 +83,8 @@
         margin-right: 20px;
     }
 
-    &:hover {
+    &:hover,
+    &.activeBtn {
         background-color: $bigBTN-hover-color;
         color: $primary-light-color;
     }

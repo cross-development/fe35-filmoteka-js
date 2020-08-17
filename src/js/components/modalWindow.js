@@ -1,7 +1,7 @@
 import refs from '../controllers/controllerRefs';
 
-export function openWarningModalWindow() {
-    refs.modalWindowText.textContent = 'No matches found. Make another query';
+export function openWarningModalWindow(modalWindowTextContent) {
+    refs.modalWindowText.textContent = modalWindowTextContent;
     refs.modalWindow.style.display = 'block';
 }
 

@@ -60,11 +60,12 @@
     </footer>
 
     <div class="scrollUp">
-        <!-- <i class="fa fa-chevron-up" aria-hidden="true"></i> -->
+        <i class="up"></i>
     </div>
 
     <script id="filmsTemplate" type="text/template">
-        <section id="js-homePage" class="main__homePage">  
+        <section id="js-homePage" class="main__homePage">
+            <h2 class="section-title"></h2>
             <ul class="filmsList">
                 {{#each this}}
                 <li class="filmItem">
@@ -72,6 +73,7 @@
                         <img src="{{formatFilmPoster poster_path}}" alt="{{original_title}}" class="filmPoster">
                         <span>{{original_title}} ({{formatReleaseDate release_date}})</span>
                     </a>
+                    <span class="vote">{{vote_average}}</span>
                 </li>
                 {{/each}}
             </ul>
@@ -86,11 +88,11 @@
         
             <div class="details_wrapper">
                 <h1>{{title}} ({{formatReleaseDate release_date}})</h1>
-                <p>vote / votes {{vote_average}} / {{vote_count}}</p>
-                <p>popularity {{popularity}}</p>
-                <p>original title {{original_title}}</p>
+                <p>Vote / votes: <span>{{vote_average}} / {{vote_count}}</span></p>
+                <p>Popularity: {{popularity}}</p>
+                <p>Original title: {{original_title}}</p>
                 <ul class="genres_list">
-                    genres
+                    Genres:
                     {{#each genres}}
                     <li class="genres_list__item">{{name}}</li>
                     {{/each}}

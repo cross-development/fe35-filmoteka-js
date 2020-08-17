@@ -16,17 +16,16 @@
 
 .nav {
     display: flex;
-    flex: 0 0 70%;
+    flex: 0 0 90%;
     justify-content: space-between;
-    display: table;
+    align-items: center;
+    list-style: none;
 }
 
 .menu_item {
     text-transform: uppercase;
-    margin: 3px;
-    list-style: none;
     text-align: center;
-    font-size: 14px;
+    font-size: 16px;
     position: relative;
     width: calc(100% / 3);
     display: table-cell;
@@ -66,16 +65,16 @@
 
 .header {
     background-color: $bg-primary-color;
-    height: 65px;
+    height: 60px;
     width: 100%;
     font-weight: 600;
     position: fixed;
-    z-index: 100000;
+    z-index: 9998;
     padding: 0 20px;
     top: 0;
     align-items: center;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 @media (min-width: 768px) {

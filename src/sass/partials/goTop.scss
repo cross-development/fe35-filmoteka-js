@@ -1,17 +1,28 @@
 .scrollUp {
     position: fixed;
-    color: $primary-light-color;
-    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRfI8I0fHC5dbpEbq9CMoUfhN0W4WyiYe18ag&usqp=CAU');
-    background-size: contain;
     background-color: $buttonUP-color;
     z-index: 8888;
     font-size: 20px;
     width: 40px;
     height: 40px;
+    padding-top: 12px;
     border-radius: 50px;
     cursor: pointer;
     text-align: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     right: 15px;
-    bottom: 18px;
+    bottom: 15px;
+    transition: all 250ms linear;
+
+    i {
+        border: solid $primary-light-color;
+        border-width: 0 5px 5px 0;
+        display: inline-block;
+        padding: 5px;
+        transform: rotate(-135deg);
+    }
+
+    &:hover {
+        transform: scale(1.2);
+    }
 }

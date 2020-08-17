@@ -4,7 +4,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: stretch;
-    padding: 0 20px;
+    padding: 10px 20px 0;
 }
 
 .poster_wrapper {
@@ -13,25 +13,26 @@
 
     & img {
         display: block;
-        height: 100%;
+        width: 100%;
     }
 }
 
 .details_wrapper {
     align-items: stretch;
     min-height: 100%;
-    padding: 5px 20px;
+    padding: 5px 20px 10px;
     box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
         0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 
     & h1 {
-        font-size: 32px;
+        font-size: 24px;
         margin-top: 10px;
         margin-bottom: 24px;
     }
 
     & h2 {
         margin-bottom: 5px;
+        font-size: 20px;
     }
 
     & p {
@@ -43,12 +44,14 @@
 .genres_list {
     list-style: none;
     display: flex;
+    flex-wrap: wrap;
     margin-bottom: 20px;
 }
 
 .genres_list__item {
     margin-left: 20px;
 }
+
 
 .overview {
     margin-bottom: 40px;
@@ -60,15 +63,13 @@
 
 .film_controls {
     display: flex;
-    width: 500px;
     justify-content: space-between;
 }
 
 .film_btn {
-    font-size: 16px;
     color: $primary-dark-color;
-    font: 1em sans-serif;
-    width: 220px;
+    font: 0.8em sans-serif;
+    width: 130px;
     text-transform: uppercase;
     height: 40px;
     border: 2px solid #8ed5dd;
@@ -84,7 +85,8 @@
         margin-right: 20px;
     }
 
-    &:hover {
+    &:hover,
+    &.activeBtn {
         background-color: $bg-primary-color;
         color: $primary-light-color;
     }
@@ -93,14 +95,24 @@
 @media (min-width: 768px) {
     .movie_wrapper {
         flex-direction: row;
+        padding-top: 15px;
     }
 
     .poster_wrapper {
         margin-bottom: 0;
-        flex: 0 0 35%;
+        flex: 0 0 26%;
     }
 
     .details_wrapper {
-        flex: 0 0 65%;
+        flex: 0 0 72%;
+    }
+
+    .film_controls {
+        justify-content: start;
+    }
+
+    .film_btn {
+        width: 220px;
+        font-size: 1em;
     }
 }

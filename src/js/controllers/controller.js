@@ -33,7 +33,7 @@ function setActiveNavNode(node) {
     if (activeNavNode) {
         activeNavNode.classList.remove('active');
     }
-
+    closeWarningModalWindow()
     activeNavNode = node;
     activeNavNode.classList.add('active');
 }
@@ -51,15 +51,15 @@ function searchFilms(e) {
     const searchQuery = input.value;
 
     if (!searchQuery) {
-        return openWarningModalWindow();
+        return openWarningModalWindow('Enter query.');
     }
 
     Model.searchQueryMovies = searchQuery;
-
+    
     Model.fetchMovies().then(resultMoviesData => {
         if (!resultMoviesData || resultMoviesData.length === 0) {
             refs.pagination.style.visibility = 'hidden';
-            openWarningModalWindow();
+            openWarningModalWindow('No matches found. Make another query.');
         }
 
         filmsPage.setData(resultMoviesData);
@@ -160,7 +160,7 @@ export default {
 
             if (!existData) {
                 refs.resultsView.innerHTML = '';
-                return openWarningModalWindow();
+                return openWarningModalWindow('Library section is empty. Add movies there.');
             }
 
             libraryPage.setData(existData);

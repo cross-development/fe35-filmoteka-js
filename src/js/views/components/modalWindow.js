@@ -1,4 +1,4 @@
-import refs from '../controllers/controllerRefs';
+import refs from '../../controllers/controllerRefs';
 
 export function openWarningModalWindow(modalWindowTextContent) {
     refs.modalWindowText.textContent = modalWindowTextContent;

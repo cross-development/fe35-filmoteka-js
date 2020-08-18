@@ -1,66 +1,50 @@
-//Core
-const API_KEY = '9e07f05bee226a5aad11e2f836e260f9';
-const baseURL = 'https://api.themoviedb.org/3';
+import filmAPI from '../services/filmAPI';
 
 export default {
     pageNumber: 1,
     query: '',
 
-    async fetchPopularMovies() {
+    async getFetchPopularFilms() {
         try {
-            const response = await fetch(
-                `${baseURL}/movie/popular?api_key=${API_KEY}&language=en-US&page=1`,
-            );
-            const data = await response.json();
+            const data = await filmAPI.fetchPopularFilms();
 
-            return data.results;
+            return data;
         } catch (error) {
             console.log('error:' + error.message);
         }
     },
 
-    async fetchMovies() {
+    async getFetchFilms() {
         try {
-            const response = await fetch(
-                `${baseURL}/search/movie?api_key=${API_KEY}&language=en-US&query=${this.query}&page=${this.pageNumber}&include_adult=false`,
-            );
-            const data = await response.json();
+            const data = await filmAPI.fetchFilms(this.query, this.pageNumber);
 
-            return data.results;
+            return data;
         } catch (error) {
             console.log('error:' + error.message);
         }
     },
 
-    async fetchMoviesDetails(movieId) {
+    async getFetchFilmDetails(movieId) {
         try {
-            const response = await fetch(
-                `${baseURL}/movie/${movieId}?api_key=${API_KEY}&language=en-US`,
-            );
+            const data = await filmAPI.fetchFilmDetails(movieId);
 
-            return await (response.ok ? response.json() : null);
+            return data;
         } catch (error) {
             console.log('error:' + error.message);
         }
     },
 
-    async fetchGenres() {
-        const response = await fetch(
-            `${baseURL}/genre/movie/list?api_key=${API_KEY}&language=en-US`,
-        );
-        const data = await response.json();
+    async getFetchGenres() {
+        const data = await filmAPI.fetchGenres();
 
-        return data.results;
+        return data;
     },
 
-    async fetchUpcomingFilm() {
+    async getFetchUpcomingFilms() {
         try {
-            const response = await fetch(
-                `${baseURL}/movie/upcoming?api_key=${API_KEY}&language=en-US&page=1`,
-            );
-            const data = await response.json();
+            const data = await filmAPI.fetchUpcomingFilms();
 
-            return data.results;
+            return data;
         } catch (error) {
             console.log('error:' + error.message);
         }

@@ -1,40 +1,35 @@
 //Core
 import Model from '../models/model';
 import refs from './controllerRefs';
-//Settings
-import { getDataFromLS } from '../settings/settings';
-import { addFilmToLibrary } from '../settings/settings';
-import { setActiveNavNode } from '../settings/settings';
-import { controlDisplayNode } from '../settings/settings';
-import { getFilmsFromLibrary } from '../settings/settings';
+//Utils
+import { clearResultsView } from '../utils/displayModeUtils';
+import { setActiveNavNode } from '../utils/displayModeUtils';
+import { controlDisplayNode } from '../utils/displayModeUtils';
+import { displayLibraryControls } from '../utils/displayModeUtils';
+import { getDataFromLS } from '../utils/localStorageUtils';
+import { addFilmToLibrary } from '../utils/localStorageUtils';
+import { getFilmsFromLibrary } from '../utils/localStorageUtils';
 //Pages
-import homePage from '../pages/homePage';
-import filmsPage from '../pages/filmsPage';
-import libraryPage from '../pages/libraryPage';
-import filmDetailsPage from '../pages/filmDetailsPage';
+import homePage from '../views/pages/homePage';
+import filmsPage from '../views/pages/filmsPage';
+import libraryPage from '../views/pages/libraryPage';
+import filmDetailsPage from '../views/pages/filmDetailsPage';
 //Components
-import createFilmControls from '../components/filmControls';
-import { openWarningModalWindow } from '../components/modalWindow';
-import { closeWarningModalWindow } from '../components/modalWindow';
+import { scrollUp } from '../views/components/scrollUp';
+import createFilmControlsSection from '../views/components/filmControls';
+import { openWarningModalWindow } from '../views/components/modalWindow';
+import { closeWarningModalWindow } from '../views/components/modalWindow';
 //Refs
 refs.scrollUp.addEventListener('click', scrollUp);
 refs.movieForm.addEventListener('submit', searchFilms);
 refs.pagination.addEventListener('click', paginationNavigation);
 refs.modalWindow.addEventListener('click', closeWarningModalWindow);
 
-function scrollUp() {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-    });
-}
-
 function searchFilms(e) {
     e.preventDefault();
 
-    const form = e.target;
-    const input = form.elements.query;
-    const searchQuery = input.value;
+    const formInput = e.target.elements.query;
+    const searchQuery = formInput.value;
 
     if (!searchQuery) {
         return openWarningModalWindow('Please, enter query.');
@@ -42,20 +37,12 @@ function searchFilms(e) {
 
     Model.searchQueryMovies = searchQuery;
 
-    Model.fetchMovies().then(resultMoviesData => {
-        if (!resultMoviesData || resultMoviesData.length === 0) {
-            refs.pagination.style.visibility = 'hidden';
-            openWarningModalWindow('No matches found. Make another query.');
-        }
+    fetchFilmsByQuery();
 
-        filmsPage.setData(resultMoviesData);
-        filmsPage.render();
+    refs.pagination.style.display = 'flex';
+    refs.pagination.firstElementChild.style.visibility = 'hidden';
 
-        refs.pagination.style.display = 'flex';
-        refs.pagination.firstElementChild.style.visibility = 'hidden';
-    });
-
-    input.value = '';
+    formInput.value = '';
 }
 
 function paginationNavigation(e) {
@@ -64,11 +51,8 @@ function paginationNavigation(e) {
     if (button.dataset.move === 'next') {
         Model.currentPageNumber += 1;
 
-        Model.fetchMovies().then(resultMoviesData => {
-            filmsPage.setData(resultMoviesData);
-            filmsPage.render();
-            refs.page.textContent = Model.currentPageNumber;
-        });
+        fetchFilmsByQuery();
+        refs.page.textContent = Model.currentPageNumber;
 
         if (Model.currentPageNumber > 1) {
             refs.pagination.firstElementChild.style.visibility = 'visible';
@@ -78,28 +62,53 @@ function paginationNavigation(e) {
     if (button.dataset.move === 'prev') {
         Model.currentPageNumber -= 1;
 
+        fetchFilmsByQuery();
+        refs.page.textContent = Model.currentPageNumber;
+
         if (Model.currentPageNumber === 1) {
             refs.pagination.firstElementChild.style.visibility = 'hidden';
         }
-
-        Model.fetchMovies().then(resultMoviesData => {
-            filmsPage.setData(resultMoviesData);
-            filmsPage.render();
-            refs.page.textContent = Model.currentPageNumber;
-        });
     }
+}
+
+async function fetchFilmsByQuery() {
+    await Model.getFetchFilms().then(resultFilmsData => {
+        if (!resultFilmsData || resultFilmsData.length === 0) {
+            refs.pagination.style.visibility = 'hidden';
+            return openWarningModalWindow(
+                'No matches found. Make another query.',
+            );
+        }
+
+        filmsPage.render(resultFilmsData);
+    });
+}
+
+function showSectionTitle(title) {
+    document.querySelector('.section-title').textContent = title;
+}
+
+function removeLibraryBtnActiveClass() {
+    Array.from(refs.libraryControls.children).map(child =>
+        child.classList.remove('activeBtn'),
+    );
 }
 
 export default {
     async homeRoute() {
         controlDisplayNode('none');
-        refs.libraryControls.style.display = 'none';
+        displayLibraryControls('none');
 
-        const popularMovies = await Model.fetchPopularMovies();
-        homePage.setData(popularMovies);
-        homePage.render();
+        const popularFilms = await Model.getFetchPopularFilms();
 
-        document.querySelector('.section-title').textContent = 'Popular Films';
+        if (!popularFilms) {
+            return openWarningModalWindow(
+                'Something went wrong! Please, try again later',
+            );
+        }
+
+        homePage.render(popularFilms);
+        showSectionTitle('Popular Films');
 
         setActiveNavNode(refs.homeNavNode, 'active');
     },
@@ -107,36 +116,45 @@ export default {
     async filmsRoute(params) {
         if (params.id) {
             controlDisplayNode('none');
-            refs.libraryControls.style.display = 'none';
+            displayLibraryControls('none');
 
-            const filmDetails = await Model.fetchMoviesDetails(params.id);
+            const filmDetails = await Model.getFetchFilmDetails(params.id);
 
-            filmDetailsPage.setData(filmDetails);
-            filmDetailsPage.render();
+            if (!filmDetails) {
+                return openWarningModalWindow(
+                    'Something went wrong! Please try again later',
+                );
+            }
 
-            createFilmControls();
+            filmDetailsPage.render(filmDetails);
+
+            createFilmControlsSection();
+
             getDataFromLS('watched', params.id);
             getDataFromLS('queue', params.id);
 
             const controls = document.querySelector('.film_controls');
-            controls.addEventListener('click', e => {
-                addFilmToLibrary(e, filmDetails);
-            });
+            controls.addEventListener('click', e =>
+                addFilmToLibrary(e, filmDetails),
+            );
 
             setActiveNavNode(refs.filmsNavNode, 'active');
         } else {
             controlDisplayNode('flex');
-            refs.libraryControls.style.display = 'none';
+            displayLibraryControls('none');
             refs.pagination.style.display = 'none';
-            refs.resultsView.innerHTML = '';
+            clearResultsView();
 
-            const upcomingFilms = await Model.fetchUpcomingFilm();
+            const upcomingFilms = await Model.getFetchUpcomingFilms();
 
-            filmsPage.setData(upcomingFilms);
-            filmsPage.render();
+            if (!upcomingFilms) {
+                return openWarningModalWindow(
+                    'Something went wrong! Please try again later',
+                );
+            }
 
-            document.querySelector('.section-title').textContent =
-                'Upcoming Films';
+            filmsPage.render(upcomingFilms);
+            showSectionTitle('Upcoming Films');
 
             setActiveNavNode(refs.filmsNavNode, 'active');
         }
@@ -144,12 +162,9 @@ export default {
 
     async libraryRoute() {
         controlDisplayNode('none');
-        refs.libraryControls.style.display = 'flex';
-        refs.resultsView.innerHTML = '';
-
-        Array.from(refs.libraryControls.children).map(child =>
-            child.classList.remove('activeBtn'),
-        );
+        displayLibraryControls('flex');
+        clearResultsView();
+        removeLibraryBtnActiveClass();
 
         refs.libraryControls.addEventListener('click', e => {
             if (e.target.nodeName !== 'BUTTON') {
@@ -159,8 +174,7 @@ export default {
             const existData = getFilmsFromLibrary(e);
 
             if (!existData) {
-                refs.resultsView.innerHTML = '';
-
+                clearResultsView();
                 setActiveNavNode(refs.libraryNavNode, 'active');
 
                 return openWarningModalWindow(
@@ -168,8 +182,7 @@ export default {
                 );
             }
 
-            libraryPage.setData(existData);
-            libraryPage.render();
+            libraryPage.render(existData);
 
             setActiveNavNode(e.target, 'activeBtn');
             setActiveNavNode(refs.libraryNavNode, 'active');

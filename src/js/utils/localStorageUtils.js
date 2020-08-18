@@ -1,24 +1,3 @@
-//Imports
-import refs from '../controllers/controllerRefs';
-
-let activeNavNode;
-
-//Control mode settings
-function setActiveNavNode(node, activeClass) {
-    if (activeNavNode) {
-        activeNavNode.classList.remove(activeClass);
-    }
-
-    activeNavNode = node;
-    activeNavNode.classList.add(activeClass);
-}
-
-function controlDisplayNode(mode) {
-    refs.searchForm.style.display = `${mode}`;
-    refs.pagination.style.display = `${mode}`;
-}
-
-//LocalStorage settings
 function setFilmToLocalStorage(key, filmObj) {
     const existFavList = localStorage.getItem(key);
 
@@ -118,10 +97,4 @@ function getFilmsFromLibrary(e) {
     }
 }
 
-export {
-    getDataFromLS,
-    addFilmToLibrary,
-    getFilmsFromLibrary,
-    setActiveNavNode,
-    controlDisplayNode,
-};
+export { getDataFromLS, addFilmToLibrary, getFilmsFromLibrary };

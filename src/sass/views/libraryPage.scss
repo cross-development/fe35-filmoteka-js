@@ -1,0 +1,151 @@
+.main__list {
+    margin-top: 15px;
+}
+
+.main__item-link {
+    margin: 0;
+    padding: 0;
+}
+
+.main__item-block {
+    margin: 0;
+    padding: 0;
+}
+
+.main__item {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    display: block;
+    left: 0;
+}
+
+.main__item-img {
+    min-width: 100%;
+    height: 160px;
+    object-fit: cover;
+    margin: 0;
+    padding: 0;
+    border-radius: 10px;
+}
+
+.main__item-about-list {
+    position: absolute;
+    bottom: 10px;
+    left: 15px;
+    display: flex;
+    list-style: none;
+}
+
+.main__item-title {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-radius: 6px;
+    background-color: $primary-light-color;
+    box-shadow: inset 0px 0px 2.79px 0.21px rgba(0, 0, 0, 0.35),
+        inset 0px 0px 2.64px 1.36px rgba(0, 0, 0, 0.35);
+    font-size: 20px;
+    color: $primary-dark-color;
+    line-height: 0.933;
+    text-align: center;
+}
+
+.main__about-item {
+    font-size: 15px;
+    color: $primary-light-color;
+    line-height: 1.2;
+    text-align: left;
+}
+
+.header-btn-container {
+    display: flex;
+    padding: 0.5em 0;
+    justify-content: center;
+    background-color: $bg-second-color;
+    box-shadow: 0px 5px 9px 1px rgba(0, 0, 0, 0.23);
+}
+
+.header-big-btn {
+    font-size: 16px;
+    color: $primary-dark-color;
+    width: 140px;
+    height: 40px;
+    border: 2px solid #8ed5dd;
+    display: block;
+    outline: none;
+    border-radius: 4px;
+    background-color: $bg-second-color;
+    cursor: pointer;
+    transition: all 250ms linear;
+
+    &:first-child {
+        margin-right: 20px;
+    }
+
+    &:hover,
+    &.activeBtn {
+        background-color: $bigBTN-hover-color;
+        color: $primary-light-color;
+    }
+}
+
+@media (max-width: 767px) {
+    .container {
+        width: 300px;
+    }
+
+    .main__list {
+        width: 300px;
+    }
+
+    .main__item {
+        height: 160px;
+        width: 300px;
+        margin-bottom: 15px;
+        margin-top: 15px;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: 715px;
+        height: auto;
+    }
+
+    .main__item {
+        width: 345px;
+        height: 180px;
+    }
+
+    .main__list {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .main__item-about-list {
+        bottom: 30px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        width: 965px;
+        height: 245px;
+    }
+
+    .main__item {
+        width: 470px;
+        height: 245px;
+        margin-bottom: 15px;
+    }
+
+    .main__item-img {
+        height: 245px;
+    }
+
+    .main__item-about-list {
+        bottom: 10px;
+    }
+}

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <title>Filmoteka</title>
+</head>
+
+<body>
+    <header class="header" id="header">
+        <div class="logo-name">
+            <p class="logo"><a href="#home"><img src="./images/logo.png" alt="Logo"></a></p>
+            <p class="name">Filmoteka</p>
+        </div>
+
+        <nav class="nav">
+            <li class="menu_item">
+                <a data-role="nav-home" href="#home">Home</a>
+            </li>
+            <li class="menu_item">
+                <a data-role="nav-films" href="#films">Films</a>
+            </li>
+            <li class="menu_item">
+                <a data-role="nav-library" href="#library">My library</a>
+            </li>
+        </nav>
+    </header>
+
+    <main class="main" id="main">
+        <div class="searchbar">
+            <form id="js-form" class="main__form">
+                <button class="formButton" type="submit">
+                    <span class="searchFormButtonLabel">Search</span>
+                </button>
+                <input class="formInput" name="query" type="text" autocomplete="off"
+                    placeholder="Write movie name and click Enter">
+            </form>
+        </div>
+
+        <div class="header-btn-container">
+            <button class="header-big-btn" data-toggle="watched">Watched</button>
+            <button class="header-big-btn" data-toggle="queue">Queue</button>
+        </div>
+
+        <div id="result">
+            <!-- Тут будет рендер динамического контента -->
+        </div>
+
+        <div class="paginationContainer">
+            <button data-move="prev" class="nav_btn prev">Prev</button>
+            <p id="js-paginationPageNumber" class="paginationPageNumber">1</p>
+            <button data-move="next" class="nav_btn next">Next</button>
+        </div>
+    </main>
+
+    <footer class="footer" id="footer">
+        <div class="author">Made by <a href="https://goit-fe35-our-teem.netlify.app/" target="_blank">FE35</a></div>
+    </footer>
+
+    <div class="scrollUp">
+        <i class="up"></i>
+    </div>
+
+    <script id="filmsTemplate" type="text/template">
+        <section id="js-homePage" class="main__homePage">
+            <h2 class="section-title"></h2>
+            <ul class="filmsList">
+                {{#each this}}
+                <li class="filmItem">
+                    <a href="#films/{{id}}" class="itemLink">
+                        <img src="{{formatFilmPoster poster_path}}" alt="{{original_title}}" class="filmPoster">
+                        <span>{{original_title}} ({{formatReleaseDate release_date}})</span>
+                    </a>
+                    <span class="vote">{{vote_average}}</span>
+                </li>
+                {{/each}}
+            </ul>
+        </section>
+    </script>
+
+    <script id="filmDetailsTemplate" type="text/template">
+        <section class="movie_wrapper">
+            <div class="poster_wrapper">
+                <img src="{{formatFilmPoster poster_path}}" alt="{{title}}" />
+            </div>
+        
+            <div class="details_wrapper">
+                <h1>{{title}} ({{formatReleaseDate release_date}})</h1>
+                <p>Vote / votes: <span>{{vote_average}} / {{vote_count}}</span></p>
+                <p>Popularity: {{popularity}}</p>
+                <p>Original title: {{original_title}}</p>
+                <ul class="genres_list">
+                    Genres:
+                    {{#each genres}}
+                    <li class="genres_list__item">{{name}}</li>
+                    {{/each}}
+                </ul>
+                <div class="overview">
+                    <h2>About</h2>
+                    <p>{{overview}}</p>
+                </div>
+            </div>
+            
+            
+        </section>
+    </script>
+
+    <div id="errorTemplate" type="text/template" class="modal">
+        <div class="modal-content">
+            <!-- <span id="errorModalClose" class="close">&times;</span> -->
+            <p id="errorModalText" class="errorModalText"></p>
+        </div>
+    </div>
+</body>
+
+</html>

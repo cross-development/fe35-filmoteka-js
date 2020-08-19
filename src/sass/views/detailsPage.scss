@@ -1,0 +1,118 @@
+.movie_wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    padding: 10px 20px 0;
+}
+
+.poster_wrapper {
+    width: 100%;
+    margin-bottom: 15px;
+
+    & img {
+        display: block;
+        width: 100%;
+    }
+}
+
+.details_wrapper {
+    align-items: stretch;
+    min-height: 100%;
+    padding: 5px 20px 10px;
+    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+        0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+
+    & h1 {
+        font-size: 24px;
+        margin-top: 10px;
+        margin-bottom: 24px;
+    }
+
+    & h2 {
+        margin-bottom: 5px;
+        font-size: 20px;
+    }
+
+    & p {
+        text-align: justify;
+        margin-bottom: 10px;
+    }
+}
+
+.genres_list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.genres_list__item {
+    margin-left: 20px;
+}
+
+
+.overview {
+    margin-bottom: 40px;
+
+    & p {
+        line-height: 22px;
+    }
+}
+
+.film_controls {
+    display: flex;
+    justify-content: space-between;
+}
+
+.film_btn {
+    color: $primary-dark-color;
+    font: 0.8em sans-serif;
+    width: 130px;
+    text-transform: uppercase;
+    height: 40px;
+    border: 2px solid #8ed5dd;
+    display: block;
+    outline: none;
+    border-radius: 4px;
+    background-color: $primary-light-color;
+    background-color: $bg-second-color;
+    cursor: pointer;
+    transition: all 250ms linear;
+
+    &:first-child {
+        margin-right: 20px;
+    }
+
+    &:hover,
+    &.activeBtn {
+        background-color: $bg-primary-color;
+        color: $primary-light-color;
+    }
+}
+
+@media (min-width: 768px) {
+    .movie_wrapper {
+        flex-direction: row;
+        padding-top: 15px;
+    }
+
+    .poster_wrapper {
+        margin-bottom: 0;
+        flex: 0 0 26%;
+    }
+
+    .details_wrapper {
+        flex: 0 0 72%;
+    }
+
+    .film_controls {
+        justify-content: start;
+    }
+
+    .film_btn {
+        width: 220px;
+        font-size: 1em;
+    }
+}

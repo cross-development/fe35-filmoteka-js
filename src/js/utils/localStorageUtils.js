@@ -19,7 +19,6 @@ function removeFilmFromLocalStorage(key, filmObj) {
 
     const favFilms = [...JSON.parse(existFavList)];
     const filteredFavFilms = favFilms.filter(({ id }) => id !== filmObj.id);
-
     localStorage.setItem(key, JSON.stringify(filteredFavFilms));
 }
 
@@ -97,4 +96,8 @@ function getFilmsFromLibrary(e) {
     }
 }
 
-export { getDataFromLS, addFilmToLibrary, getFilmsFromLibrary };
+export default {
+    getDataFromLS,
+    addFilmToLibrary,
+    getFilmsFromLibrary,
+};

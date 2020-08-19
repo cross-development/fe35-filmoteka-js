@@ -6,9 +6,7 @@ export default {
 
     async getFetchPopularFilms() {
         try {
-            const data = await filmAPI.fetchPopularFilms();
-
-            return data;
+            return await filmAPI.fetchPopularFilms();
         } catch (error) {
             console.log('error:' + error.message);
         }
@@ -16,9 +14,7 @@ export default {
 
     async getFetchFilms() {
         try {
-            const data = await filmAPI.fetchFilms(this.query, this.pageNumber);
-
-            return data;
+            return await filmAPI.fetchFilms(this.query, this.pageNumber);
         } catch (error) {
             console.log('error:' + error.message);
         }
@@ -26,25 +22,19 @@ export default {
 
     async getFetchFilmDetails(movieId) {
         try {
-            const data = await filmAPI.fetchFilmDetails(movieId);
-
-            return data;
+            return await filmAPI.fetchFilmDetails(movieId);
         } catch (error) {
             console.log('error:' + error.message);
         }
     },
 
     async getFetchGenres() {
-        const data = await filmAPI.fetchGenres();
-
-        return data;
+        return await filmAPI.fetchGenres();
     },
 
     async getFetchUpcomingFilms() {
         try {
-            const data = await filmAPI.fetchUpcomingFilms();
-
-            return data;
+            return await filmAPI.fetchUpcomingFilms();
         } catch (error) {
             console.log('error:' + error.message);
         }

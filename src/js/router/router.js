@@ -1,9 +1,7 @@
 import Controller from '../controllers/controller';
 
 function getRouteInfo() {
-    const hash = location.hash
-        ? location.hash.slice(1)
-        : (location.hash = 'home');
+    const hash = location.hash ? location.hash.slice(1) : (location.hash = 'home');
     const [name, id] = hash.split('/');
 
     return { name, params: { id } };

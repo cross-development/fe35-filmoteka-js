@@ -11,8 +11,11 @@ function setActiveNavNode(node, activeClass) {
     activeNavNode.classList.add(activeClass);
 }
 
-function controlDisplayNode(mode) {
+function displaySearchForm(mode) {
     refs.searchForm.style.display = `${mode}`;
+}
+
+function displayPaginationNode(mode) {
     refs.pagination.style.display = `${mode}`;
 }
 
@@ -24,9 +27,22 @@ function clearResultsView() {
     refs.resultsView.innerHTML = '';
 }
 
-export {
+function removeLibraryBtnActiveClass() {
+    Array.from(refs.libraryControls.children).map(child =>
+        child.classList.remove('activeBtn'),
+    );
+}
+
+function showSectionTitle(title) {
+    document.querySelector('.section-title').textContent = title;
+}
+
+export default {
     setActiveNavNode,
-    controlDisplayNode,
+    displaySearchForm,
     displayLibraryControls,
     clearResultsView,
+    removeLibraryBtnActiveClass,
+    showSectionTitle,
+    displayPaginationNode,
 };

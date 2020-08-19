@@ -2,20 +2,15 @@
 import Model from '../models/model';
 import refs from './controllerRefs';
 //Utils
-import { clearResultsView } from '../utils/displayModeUtils';
-import { setActiveNavNode } from '../utils/displayModeUtils';
-import { controlDisplayNode } from '../utils/displayModeUtils';
-import { displayLibraryControls } from '../utils/displayModeUtils';
-import { getDataFromLS } from '../utils/localStorageUtils';
-import { addFilmToLibrary } from '../utils/localStorageUtils';
-import { getFilmsFromLibrary } from '../utils/localStorageUtils';
+import displayModeUtils from '../utils/displayModeUtils';
+import localStorageUtils from '../utils/localStorageUtils';
 //Pages
 import homePage from '../views/pages/homePage';
 import filmsPage from '../views/pages/filmsPage';
 import libraryPage from '../views/pages/libraryPage';
 import filmDetailsPage from '../views/pages/filmDetailsPage';
 //Components
-import { scrollUp } from '../views/components/scrollUp';
+import scrollUp from '../views/components/scrollUp';
 import createFilmControlsSection from '../views/components/filmControls';
 import { openWarningModalWindow } from '../views/components/modalWindow';
 import { closeWarningModalWindow } from '../views/components/modalWindow';
@@ -75,29 +70,18 @@ async function fetchFilmsByQuery() {
     await Model.getFetchFilms().then(resultFilmsData => {
         if (!resultFilmsData || resultFilmsData.length === 0) {
             refs.pagination.style.visibility = 'hidden';
-            return openWarningModalWindow(
-                'No matches found. Make another query.',
-            );
+            return openWarningModalWindow('No matches found. Make another query.');
         }
 
         filmsPage.render(resultFilmsData);
     });
 }
 
-function showSectionTitle(title) {
-    document.querySelector('.section-title').textContent = title;
-}
-
-function removeLibraryBtnActiveClass() {
-    Array.from(refs.libraryControls.children).map(child =>
-        child.classList.remove('activeBtn'),
-    );
-}
-
 export default {
     async homeRoute() {
-        controlDisplayNode('none');
-        displayLibraryControls('none');
+        displayModeUtils.displaySearchForm('none');
+        displayModeUtils.displayPaginationNode('none');
+        displayModeUtils.displayLibraryControls('none');
 
         const popularFilms = await Model.getFetchPopularFilms();
 
@@ -108,15 +92,16 @@ export default {
         }
 
         homePage.render(popularFilms);
-        showSectionTitle('Popular Films');
 
-        setActiveNavNode(refs.homeNavNode, 'active');
+        displayModeUtils.showSectionTitle('Popular Films');
+        displayModeUtils.setActiveNavNode(refs.homeNavNode, 'active');
     },
 
     async filmsRoute(params) {
         if (params.id) {
-            controlDisplayNode('none');
-            displayLibraryControls('none');
+            displayModeUtils.displaySearchForm('none');
+            displayModeUtils.displayPaginationNode('none');
+            displayModeUtils.displayLibraryControls('none');
 
             const filmDetails = await Model.getFetchFilmDetails(params.id);
 
@@ -130,20 +115,20 @@ export default {
 
             createFilmControlsSection();
 
-            getDataFromLS('watched', params.id);
-            getDataFromLS('queue', params.id);
+            localStorageUtils.getDataFromLS('watched', params.id);
+            localStorageUtils.getDataFromLS('queue', params.id);
 
             const controls = document.querySelector('.film_controls');
             controls.addEventListener('click', e =>
-                addFilmToLibrary(e, filmDetails),
+                localStorageUtils.addFilmToLibrary(e, filmDetails),
             );
 
-            setActiveNavNode(refs.filmsNavNode, 'active');
+            displayModeUtils.setActiveNavNode(refs.filmsNavNode, 'active');
         } else {
-            controlDisplayNode('flex');
-            displayLibraryControls('none');
-            refs.pagination.style.display = 'none';
-            clearResultsView();
+            displayModeUtils.displaySearchForm('flex');
+            displayModeUtils.displayLibraryControls('none');
+            displayModeUtils.displayPaginationNode('none');
+            displayModeUtils.clearResultsView();
 
             const upcomingFilms = await Model.getFetchUpcomingFilms();
 
@@ -154,28 +139,29 @@ export default {
             }
 
             filmsPage.render(upcomingFilms);
-            showSectionTitle('Upcoming Films');
 
-            setActiveNavNode(refs.filmsNavNode, 'active');
+            displayModeUtils.showSectionTitle('Upcoming Films');
+            displayModeUtils.setActiveNavNode(refs.filmsNavNode, 'active');
         }
     },
 
     async libraryRoute() {
-        controlDisplayNode('none');
-        displayLibraryControls('flex');
-        clearResultsView();
-        removeLibraryBtnActiveClass();
+        displayModeUtils.displaySearchForm('none');
+        displayModeUtils.displayPaginationNode('none');
+        displayModeUtils.displayLibraryControls('flex');
+        displayModeUtils.clearResultsView();
+        displayModeUtils.removeLibraryBtnActiveClass();
 
         refs.libraryControls.addEventListener('click', e => {
             if (e.target.nodeName !== 'BUTTON') {
                 return;
             }
 
-            const existData = getFilmsFromLibrary(e);
+            const existData = localStorageUtils.getFilmsFromLibrary(e);
 
             if (!existData) {
-                clearResultsView();
-                setActiveNavNode(refs.libraryNavNode, 'active');
+                displayModeUtils.clearResultsView();
+                displayModeUtils.setActiveNavNode(refs.libraryNavNode, 'active');
 
                 return openWarningModalWindow(
                     `${e.target.textContent} list is empty. Add movies there.`,
@@ -184,10 +170,10 @@ export default {
 
             libraryPage.render(existData);
 
-            setActiveNavNode(e.target, 'activeBtn');
-            setActiveNavNode(refs.libraryNavNode, 'active');
+            displayModeUtils.setActiveNavNode(e.target, 'activeBtn');
+            displayModeUtils.setActiveNavNode(refs.libraryNavNode, 'active');
         });
 
-        setActiveNavNode(refs.libraryNavNode, 'active');
+        displayModeUtils.setActiveNavNode(refs.libraryNavNode, 'active');
     },
 };
